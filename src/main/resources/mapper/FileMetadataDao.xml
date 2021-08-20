@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tjsoft.project.dao.FileMetadataDao">
+
+    <resultMap id="BaseResultMap" type="com.tjsoft.project.entity.FileMetadata">
+        <!--@Table file_metadata-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="fileType" column="file_type" jdbcType="VARCHAR"/>
+        <result property="associateId" column="associate_id" jdbcType="VARCHAR"/>
+        <result property="associateObjectClass" column="associate_object_class" jdbcType="VARCHAR"/>
+        <result property="fileOrder" column="file_order" jdbcType="INTEGER"/>
+        <result property="fileOriginName" column="file_origin_name" jdbcType="VARCHAR"/>
+        <result property="fileDisplayName" column="file_display_name" jdbcType="VARCHAR"/>
+        <result property="fileYear" column="file_year" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="upload_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, file_type, associate_id, associate_object_class, file_order, file_origin_name, file_display_name, file_year, upload_time, remark, user_id
+        from security.file_metadata
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, file_type, associate_id, associate_object_class, file_order, file_origin_name, file_display_name, file_year, upload_time, remark, user_id
+        from security.file_metadata
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, file_type, associate_id, associate_object_class, file_order, file_origin_name, file_display_name, file_year, upload_time, remark, user_id
+        from security.file_metadata
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="fileType != null and fileType != ''">
+                and file_type = #{fileType}
+            </if>
+            <if test="associateId != null and associateId != ''">
+                and associate_id = #{associateId}
+            </if>
+            <if test="associateObjectClass != null and associateObjectClass != ''">
+                and associate_object_class = #{associateObjectClass}
+            </if>
+            <if test="fileOrder != null">
+                and file_order = #{fileOrder}
+            </if>
+            <if test="fileOriginName != null and fileOriginName != ''">
+                and file_origin_name = #{fileOriginName}
+            </if>
+            <if test="fileDisplayName != null and fileDisplayName != ''">
+                and file_display_name = #{fileDisplayName}
+            </if>
+            <if test="fileYear != null">
+                and file_year = #{fileYear}
+            </if>
+            <if test="uploadTime != null">
+                and upload_time = #{uploadTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

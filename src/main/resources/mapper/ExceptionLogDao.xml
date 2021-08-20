@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tjsoft.project.dao.ExceptionLogDao">
+
+    <resultMap id="BaseResultMap" type="com.tjsoft.project.entity.ExceptionLog">
+        <!--@Table exception_log-->
+        <result property="excId" column="exc_id" jdbcType="VARCHAR"/>
+        <result property="excRequParam" column="exc_requ_param" jdbcType="VARCHAR"/>
+        <result property="excName" column="exc_name" jdbcType="VARCHAR"/>
+        <result property="excMessage" column="exc_message" jdbcType="VARCHAR"/>
+        <result property="operUserId" column="oper_user_id" jdbcType="INTEGER"/>
+        <result property="operUserName" column="oper_user_name" jdbcType="VARCHAR"/>
+        <result property="operMethod" column="oper_method" jdbcType="VARCHAR"/>
+        <result property="operUri" column="oper_uri" jdbcType="VARCHAR"/>
+        <result property="operIp" column="oper_ip" jdbcType="VARCHAR"/>
+        <result property="operCreateTime" column="oper_create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          exc_id, exc_requ_param, exc_name, exc_message, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.exception_log
+        where exc_id = #{excId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          exc_id, exc_requ_param, exc_name, exc_message, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.exception_log
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          exc_id, exc_requ_param, exc_name, exc_message, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.exception_log
+        <where>
+            <if test="excId != null and excId != ''">
+                and exc_id = #{excId}
+            </if>
+            <if test="excRequParam != null and excRequParam != ''">
+                and exc_requ_param = #{excRequParam}
+            </if>
+            <if test="excName != null and excName != ''">
+                and exc_name = #{excName}
+            </if>
+            <if test="excMessage != null and excMessage != ''">
+                and exc_message = #{excMessage}
+            </if>
+            <if test="operUserId != null">
+                and oper_user_id = #{operUserId}
+            </if>
+            <if test="operUserName != null and operUserName != ''">
+                and oper_user_name = #{operUserName}
+            </if>
+            <if test="operMethod != null and operMethod != ''">
+                and oper_method = #{operMethod}
+            </if>
+            <if test="operUri != null and operUri != ''">
+                and oper_uri = #{operUri}
+            </if>
+            <if test="operIp != null and operIp != ''">
+                and oper_ip = #{operIp}
+            </if>
+            <if test="operCreateTime != null">
+                and oper_create_time = #{operCreateTime}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

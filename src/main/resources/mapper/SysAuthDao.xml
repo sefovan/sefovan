@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tjsoft.project.dao.SysAuthDao">
+
+    <resultMap id="BaseResultMap" type="com.tjsoft.project.entity.SysAuth">
+        <!--@Table sys_auth-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="permission" column="permission" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               name,
+               permission
+        from security.sys_auth
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select id,
+               name,
+               permission
+        from security.sys_auth limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, name, permission
+        from security.sys_auth
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="permission != null and permission != ''">
+                and permission = #{permission}
+            </if>
+        </where>
+    </select>
+    <select id="findAuthByUserId" resultType="com.tjsoft.project.entity.SysAuth">
+        SELECT a.*
+        FROM sys_auth a
+                 LEFT JOIN sys_role_auth ra ON ra.auth_id = a.id
+                 LEFT JOIN sys_user_role ur ON ur.role_id = ra.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+
+
+</mapper>

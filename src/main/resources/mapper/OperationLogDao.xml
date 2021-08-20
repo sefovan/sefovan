@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tjsoft.project.dao.OperationLogDao">
+
+    <resultMap id="BaseResultMap" type="com.tjsoft.project.entity.OperationLog">
+        <!--@Table operation_log-->
+        <result property="operId" column="oper_id" jdbcType="VARCHAR"/>
+        <result property="operModule" column="oper_module" jdbcType="VARCHAR"/>
+        <result property="operType" column="oper_type" jdbcType="VARCHAR"/>
+        <result property="operDesc" column="oper_desc" jdbcType="VARCHAR"/>
+        <result property="operRequBody" column="oper_requ_body" jdbcType="VARCHAR"/>
+        <result property="operRequParam" column="oper_requ_param" jdbcType="VARCHAR"/>
+        <result property="operRespParam" column="oper_resp_param" jdbcType="VARCHAR"/>
+        <result property="operUserId" column="oper_user_id" jdbcType="INTEGER"/>
+        <result property="operUserName" column="oper_user_name" jdbcType="VARCHAR"/>
+        <result property="operMethod" column="oper_method" jdbcType="VARCHAR"/>
+        <result property="operUri" column="oper_uri" jdbcType="VARCHAR"/>
+        <result property="operIp" column="oper_ip" jdbcType="VARCHAR"/>
+        <result property="operCreateTime" column="oper_create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          oper_id, oper_module, oper_type, oper_desc, oper_requ_body, oper_requ_param, oper_resp_param, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.operation_log
+        where oper_id = #{operId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          oper_id, oper_module, oper_type, oper_desc, oper_requ_body, oper_requ_param, oper_resp_param, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.operation_log
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          oper_id, oper_module, oper_type, oper_desc, oper_requ_body, oper_requ_param, oper_resp_param, oper_user_id, oper_user_name, oper_method, oper_uri, oper_ip, oper_create_time
+        from security.operation_log
+        <where>
+            <if test="operId != null and operId != ''">
+                and oper_id = #{operId}
+            </if>
+            <if test="operModule != null and operModule != ''">
+                and oper_module = #{operModule}
+            </if>
+            <if test="operType != null and operType != ''">
+                and oper_type = #{operType}
+            </if>
+            <if test="operDesc != null and operDesc != ''">
+                and oper_desc = #{operDesc}
+            </if>
+            <if test="operRequBody != null and operRequBody != ''">
+                and oper_requ_body = #{operRequBody}
+            </if>
+            <if test="operRequParam != null and operRequParam != ''">
+                and oper_requ_param = #{operRequParam}
+            </if>
+            <if test="operRespParam != null and operRespParam != ''">
+                and oper_resp_param = #{operRespParam}
+            </if>
+            <if test="operUserId != null">
+                and oper_user_id = #{operUserId}
+            </if>
+            <if test="operUserName != null and operUserName != ''">
+                and oper_user_name = #{operUserName}
+            </if>
+            <if test="operMethod != null and operMethod != ''">
+                and oper_method = #{operMethod}
+            </if>
+            <if test="operUri != null and operUri != ''">
+                and oper_uri = #{operUri}
+            </if>
+            <if test="operIp != null and operIp != ''">
+                and oper_ip = #{operIp}
+            </if>
+            <if test="operCreateTime != null">
+                and oper_create_time = #{operCreateTime}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
