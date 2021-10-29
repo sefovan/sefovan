@@ -1,5 +1,6 @@
 package com.tjsoft.project;
 
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import com.tjsoft.project.entity.SysUser;
 import com.tjsoft.project.listener.ApplicationStartedEventListener;
 import lombok.extern.log4j.Log4j2;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @SpringBootApplication
 @Log4j2
+@NacosPropertySource(dataId = "application-dev.yml", autoRefreshed = true)
 public class ProjectApplication {
 
     public static void main(String[] args) {

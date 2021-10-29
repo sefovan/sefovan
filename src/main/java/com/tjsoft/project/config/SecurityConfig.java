@@ -1,5 +1,6 @@
 package com.tjsoft.project.config;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.tjsoft.project.security.UserAuthenticationProvider;
 import com.tjsoft.project.security.UserPermissionEvaluator;
 import com.tjsoft.project.security.filter.JWTAuthenticationFilter;
@@ -23,6 +24,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 
 /**
  * 系统安全核心配置
+ *
  * @author sefo
  * @version V1.0
  * @Package com.tjsoft.project.config
@@ -34,7 +36,8 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启方法权限注解
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${jwt.antMatchers}")
+//    @Value("${jwt.antMatchers}")
+    @NacosValue(value = "${jwt.antMatchers}", autoRefreshed = true)
     private String antMatchers;
 
     /**
@@ -114,7 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println(antMatchers);
+        System.out.println("antMatchers:" + antMatchers);
         http.authorizeRequests() // 权限配置
                 .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()// 获取白名单（不进行权限验证）
                 .anyRequest().authenticated() // 其他的需要登陆后才能访问

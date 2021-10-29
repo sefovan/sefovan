@@ -1,76 +1,17 @@
-server:
-    port: 8081
-
-# JWT配置
-jwt:
-    # 配置白名单（不需要认证）
-    antMatchers: /login/**,/static/**,/doc.html,/resources/**,/webjars/**,/swagger-resources/**,/v2/**,/swagger-ui.html
-    # 过期时间，单位秒 默认300
-    expiration: 10000000
-    # 刷新时间，单位天 默认 1
-    refreshTime: 100
-    # 密匙Keyf
-    secret: JWTSecret,C3Stones
-    # HeaderKey
-    tokenHeader: Authorization
-    # Token前缀
-    tokenPrefix: Bearer
-mybatis-plus:
-    # 打印sql
-    configuration:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    mapper-locations: classpath:/mapper/**.xml
-    typeAliasesPackage: com.tjsoft.project.entity
 spring:
-    datasource:
-        driverClassName: com.mysql.cj.jdbc.Driver
-        hikari:
-            # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
-            auto-commit: true
-            #如果您的驱动程序支持JDBC4，不要设置此属性
-            connection-test-query: SELECT 1
-            # 连接超时时间,默认30秒
-            connection-timeout: 30000
-            # 空闲连接存活最大时间，默认10分钟
-            idle-timeout: 180000
-            # 连接池连接的最长生命周期，默认30分钟
-            max-lifetime: 1800000
-            # 连接池最大连接数，默认是10
-            maximum-pool-size: 50
-            # 最小空闲连接数量
-            minimum-idle: 10
-            #连接将被测试活动的最大时间量
-            validationTimeout: 10000
-        # Hikari连接池需要jdbc-url属性，不需要url属性
-        jdbc-url: jdbc:mysql://192.168.149.11:3306/security?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-        password: 123456
-        type: com.zaxxer.hikari.HikariDataSource
-        username: root
-    #redis配置
-    redis:
-        host: localhost
-        password:
-        port: 6379
-    #mongo配置
-    data:
-        mongodb:
-            # mongodb://账号:密码@ip:port/数据库名
-            uri: mongodb://admin:123456@192.168.149.11:27017/admin
-    #文件上传设置
-    servlet:
-        multipart:
-            #是否支持批量上传
-            enabled: true
-            #上传文件最大为 100M
-            max-file-size: 100MB
-            #上传总数据大小 200M
-            max-request-size: 200MB
+  application:
+    #name: application-dev
+nacos:
+  config:
+    server-addr: 192.168.149.11:8848
+    namespace: 503d472a-8616-495a-9c19-63055d239b22
+    #data-id: application-dev.yml
+    #auto-refresh: true
+    username: nacos
+    password: nacos
 
-# 日志配置(配置文件名为log4j2-spring.xml可不填写该配置)
-#logging:
- #   config: classpath:log4j2.xml
 
 # 日志配置路径和名称
 log:
-    path: /Users/sefo/Downloads/logs
-    name: project
+  path: /Users/sefo/Downloads/logs
+  name: project

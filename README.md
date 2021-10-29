@@ -570,3 +570,5 @@ $!callback.setSavePath($tool.append($modulePath, "/src/main/resources/mapper"))
 
 #3 日志
 使用的log4j2日志框架，在需要使用日志的类中添加@log4j2的注解，即可使用
+
+#4 nacos

@@ -1,5 +1,6 @@
 package com.tjsoft.project.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.tjsoft.project.dao.repo.MongoFileRepo;
 import com.tjsoft.project.entity.FileMetadata;
@@ -60,7 +61,7 @@ public class UploadController {
         fileMetadata.setUploadTime(Timestamp.valueOf(LocalDateTime.now()));//上传时间
         fileMetadata.setFileOrder(1);//排序
         fileMetadata.setRemark(comment);
-        fileMetadata.setFileYear(2019);//年份
+        fileMetadata.setFileYear(DateUtil.thisYear());//年份
         fileMetadata.setFileOriginName(file.getOriginalFilename());//文件名
         fileMetadata.setUserId(SecurityUtil.getUserId());//操作人
         // 下面这三个应该是什么？

@@ -2,11 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.9</version>
+        <version>2.3.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tjsoft</groupId>
@@ -211,6 +210,17 @@
             <version>5.6.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>commons-io</groupId>-->
+<!--            <artifactId>commons-io</artifactId>-->
+<!--            <version>2.6</version>-->
+<!--        </dependency>-->
+
         <!--mongo 子包-->
 <!--        <dependency>-->
 <!--            <groupId>com.tjsoft</groupId>-->
@@ -219,6 +229,12 @@
 <!--            <scope>compile</scope>-->
 <!--        </dependency>-->
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba.boot/nacos-config-spring-boot-starter -->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>0.2.7</version>
+        </dependency>
 
     </dependencies>
 
